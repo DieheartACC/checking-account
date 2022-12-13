@@ -28,7 +28,7 @@ export const Account = () => {
                 <h4>Hello, {name}</h4>
                 <span>Account Balance: ${balance.toFixed(2)}</span>
                 <div>
-                    <input onChange={(event) => {
+                    <input value={inputAmt === 0 ? "" : inputAmt} onChange={(event) => {
                         handleInputChange(event);
                     }}/>
                     <div>
