@@ -3,22 +3,26 @@ import React, {ChangeEvent, useState} from "react";
 export const Account = () => {
     const [name, setName] = useState("Bill");
     const [balance, setBalance] = useState(0.00);
-    const [inputAmt, setInputAmt] = useState(0.00);
+    const [inputAmt, setInputAmt] = useState("");
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setInputAmt(Number.parseFloat(event.target.value));
+        setInputAmt(event.target.value);
     }
 
     const handleDeposit = () => {
-        if (inputAmt > 0) {
-            setBalance(balance + inputAmt);
-            setInputAmt(0.00);
+        let amount = Number.parseFloat(inputAmt)
+        if (amount > 0) {
+            setBalance(balance + amount);
+            setInputAmt("");
         }
     }
 
     const handleWithdrawal = () => {
-        if (inputAmt > 0)
-            setBalance(balance - inputAmt);
+        let amount = Number.parseFloat(inputAmt)
+        if (amount > 0) {
+            setBalance(balance - amount);
+            setInputAmt("");
+        }
     }
 
     return (
@@ -28,7 +32,7 @@ export const Account = () => {
                 <h4>Hello, {name}</h4>
                 <span>Account Balance: ${balance.toFixed(2)}</span>
                 <div>
-                    <input value={inputAmt === 0 ? "" : inputAmt} onChange={(event) => {
+                    <input value={inputAmt === "" ? "" : inputAmt} onChange={(event) => {
                         handleInputChange(event);
                     }}/>
                     <div>
@@ -38,7 +42,7 @@ export const Account = () => {
                         </button>
                         <button
                             onClick={handleWithdrawal}
-                        >Withdrawal
+                        >Withdraw
                         </button>
                     </div>
                 </div>
